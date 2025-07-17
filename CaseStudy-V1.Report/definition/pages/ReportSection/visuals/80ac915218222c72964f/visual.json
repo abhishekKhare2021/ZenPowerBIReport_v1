@@ -1,0 +1,107 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "80ac915218222c72964f",
+  "position": {
+    "x": 30.236220472440944,
+    "y": 498.89763779527556,
+    "z": 5001,
+    "height": 173.01837270341207,
+    "width": 498.89763779527556,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "donutChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimSprint"
+                    }
+                  },
+                  "Property": "SprintName"
+                }
+              },
+              "queryRef": "DimSprint.SprintName",
+              "nativeQueryRef": "SprintName",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimSprint"
+                    }
+                  },
+                  "Property": "Effort Person"
+                }
+              },
+              "queryRef": "DimSprint.Effort Person",
+              "nativeQueryRef": "Effort Person"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DimSprint"
+                  }
+                },
+                "Property": "Effort Person"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "911457be115269c2a994",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimSprint"
+              }
+            },
+            "Property": "SprintName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "455e8a53bf01676bf5c7",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimSprint"
+              }
+            },
+            "Property": "Effort Person"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}
