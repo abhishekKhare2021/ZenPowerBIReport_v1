@@ -1,0 +1,36 @@
+table DimResourceName
+	lineageTag: 9f65fa63-18b6-47c8-bf71-758ffd53e092
+
+	column Name
+		dataType: string
+		lineageTag: 9ef0741c-4bd2-4610-a0d1-5fd23c80db93
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column ResourceId
+		dataType: string
+		lineageTag: 1cbe0329-0bf4-4496-89c1-b41e25fe26fd
+		summarizeBy: none
+		sourceColumn: ResourceId
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition DimResourceName-264567a7-6f78-4ccc-8877-b00f86786a48 = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WCkrMVdJRMlSK1YlWCs5IrARzjaDc1NScRCDXGMwFqkwtzgByTSCypUUQrimY65ufkZgH5JmBeS6ZZZUgneZgnl8iVKkFmOueWFoCtsYSzHUG2Qpyg4FSbCwA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type text) meta [Serialized.Text = true]) in type table [Name = _t, ResourceId = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Name", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

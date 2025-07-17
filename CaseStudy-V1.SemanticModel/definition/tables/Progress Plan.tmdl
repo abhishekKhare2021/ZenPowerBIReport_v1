@@ -1,0 +1,67 @@
+table 'Progress Plan'
+	lineageTag: 24c8b437-14f7-4a89-a27e-b0310cbec2e4
+
+	column Activity
+		dataType: string
+		lineageTag: ac62b21b-2711-46cf-aa79-5d73fa5a2462
+		summarizeBy: none
+		sourceColumn: Activity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Sprint
+		dataType: int64
+		formatString: 0
+		lineageTag: f17b080d-1a8b-419b-8d36-12bd1f7b27f8
+		summarizeBy: sum
+		sourceColumn: Sprint
+
+		annotation SummarizationSetBy = Automatic
+
+	column StartDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 59603394-3118-470a-ae31-b5f9e2d5021d
+		summarizeBy: none
+		sourceColumn: StartDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column EndDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ea6fd673-d09c-461c-9df0-98eed15a01d8
+		summarizeBy: none
+		sourceColumn: EndDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Resource
+		dataType: string
+		lineageTag: 1b295e0b-04e4-4533-ab64-364b33875ea3
+		summarizeBy: none
+		sourceColumn: Resource
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition 'Progress Plan-5bf4fb27-3ac2-49d9-ae71-04cd6e7cd9ed' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WcjFU0lECYQNDfQNzfSMDQ0uQgCkSJ6g42VApVgeo1ogYtUYQtcbEqDWGqDUhRq2JUmwsAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type text) meta [Serialized.Text = true]) in type table [Activity = _t, Sprint = _t, StartDate = _t, EndDate = _t, Resource = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Activity", type text}, {"Sprint", Int64.Type}, {"StartDate", type date}, {"EndDate", type date}, {"Resource", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

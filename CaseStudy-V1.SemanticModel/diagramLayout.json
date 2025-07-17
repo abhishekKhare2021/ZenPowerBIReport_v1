@@ -1,0 +1,67 @@
+{
+  "version": "1.0.0",
+  "diagrams": [
+    {
+      "name": "All tables",
+      "zoomValue": 104.45,
+      "isDefault": true,
+      "tables": [
+        "DimResourceName",
+        "Progress Plan",
+        "DimActivity",
+        "DimSprint",
+        "SprintDetails"
+      ],
+      "layout": {
+        "boundingBoxWidth": 800.022996293686,
+        "boundingBoxHeight": 387.74429072252934,
+        "boundingBoxPosition": {
+          "x": 263.65340389779323,
+          "y": 0
+        },
+        "nodes": [
+          {
+            "height": 81,
+            "layedOut": true,
+            "left": 883.67640019147916,
+            "nodeIndex": "DimResourceName",
+            "top": 179.990426041168,
+            "width": 180
+          },
+          {
+            "height": 157,
+            "layedOut": true,
+            "left": 595.84712979395135,
+            "nodeIndex": "Progress Plan",
+            "top": 0,
+            "width": 180
+          },
+          {
+            "height": 119,
+            "layedOut": true,
+            "left": 289.76679825885424,
+            "nodeIndex": "DimActivity",
+            "top": 0,
+            "width": 180
+          },
+          {
+            "height": 138,
+            "layedOut": true,
+            "left": 263.65340389779323,
+            "nodeIndex": "DimSprint",
+            "top": 169.94893506919647,
+            "width": 180
+          },
+          {
+            "height": 119,
+            "layedOut": true,
+            "left": 529.7252301648814,
+            "nodeIndex": "SprintDetails",
+            "top": 268.74429072252934,
+            "width": 180
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+relationship f0daa7f6-da4d-4dfe-b1a4-ca6a5c2839e7
+	fromColumn: SprintDetails.SprintId
+	toColumn: DimSprint.SprintId
+
+relationship 5504be36-831a-4362-85ae-ef66f67b93d9
+	crossFilteringBehavior: bothDirections
+	fromColumn: SprintDetails.ResourceId
+	toColumn: DimResourceName.ResourceId
+

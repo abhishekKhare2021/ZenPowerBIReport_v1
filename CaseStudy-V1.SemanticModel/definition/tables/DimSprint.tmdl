@@ -1,0 +1,97 @@
+table DimSprint
+	lineageTag: 439b5ac1-a398-4111-bcc5-c88f7c34c4ea
+
+	measure 'Effort Person' = CALCULATE(sum(DimSprint[Effort Required]))/CALCULATE(sum(DimSprint[ResourceRequired]))
+		formatString: 0
+		lineageTag: 5fad9019-bafd-4c39-8bc9-223466a1ce67
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure NumberOfDays = [Effort Person]/9
+		formatString: 0
+		lineageTag: a78e8e17-8480-4033-a481-5c0376098747
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column SprintId
+		dataType: string
+		lineageTag: e6054f0a-7730-4f8a-a7a5-2fc79dcd3e72
+		summarizeBy: none
+		sourceColumn: SprintId
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column SprintName
+		dataType: string
+		lineageTag: 5b8b8b8d-3f84-431e-b1f8-eb57d1dcd872
+		summarizeBy: none
+		sourceColumn: SprintName
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Sizing
+		dataType: string
+		lineageTag: 97b19748-f767-4860-8c68-f03b9eccb766
+		summarizeBy: none
+		sourceColumn: Sizing
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column StoryPoints = If(DimSprint[Sizing] = "L", 6,4)
+		formatString: 0
+		lineageTag: 6cd490ef-bff0-443b-8e65-f77a8a1ad03c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Planned Start Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: bce196b4-cf6a-49c7-b8f3-95b064150d40
+		summarizeBy: none
+		sourceColumn: Planned Start Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ResourceRequired = If(DimSprint[Sizing] = "L", 2,1)
+		formatString: 0
+		lineageTag: b944ad86-7281-480f-8524-2695867c8eb9
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Effort Required' = if(DimSprint[Sizing] = "L", 90,63)
+		formatString: 0
+		lineageTag: 37d28ee7-31a6-406f-811d-575034c52f6a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Planned End Date' = DimSprint[Planned Start Date] + [NumberOfDays]
+		formatString: Short Date
+		lineageTag: 911e4bf2-7bbc-4792-8d11-e2aa9fca87b6
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimSprint-d4a67f3c-2ff4-4f7a-9cf8-4070421e62fc = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlTSUQouKMrMKwGxfIDYwFDfwELfyMDQUilWJ1rJCK4AxPIFKbBAKIgFAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type text) meta [Serialized.Text = true]) in type table [SprintId = _t, SprintName = _t, Sizing = _t, #"Planned Start Date" = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Planned Start Date", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

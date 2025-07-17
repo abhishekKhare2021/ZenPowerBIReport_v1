@@ -1,0 +1,35 @@
+table DimActivity
+	lineageTag: 0483bdb8-0a79-4d60-b31d-0ff2550ff7a8
+
+	column 'Activity Name'
+		dataType: string
+		lineageTag: 2eb47f16-303c-4806-9eef-6fe44d19bcab
+		summarizeBy: none
+		sourceColumn: Activity Name
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Activity Desc'
+		dataType: string
+		lineageTag: 0bcc94df-df7f-46c8-a6a5-aecd9a4b095e
+		summarizeBy: none
+		sourceColumn: Activity Desc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition DimActivity-186f3074-acc6-46aa-b1e2-07e0cf0d0193 = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WckwuySzLLKlUMFTSUXJJLUvNyS9QCEotyC8qUYrVQZI3QpJ3ccKUcy5KTSxJVUgrys8rUXDNS8GtG2Z6LAA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type text) meta [Serialized.Text = true]) in type table [#"Activity Name" = _t, #"Activity Desc" = _t])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

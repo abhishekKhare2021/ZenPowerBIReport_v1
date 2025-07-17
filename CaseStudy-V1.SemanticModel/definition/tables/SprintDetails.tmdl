@@ -1,0 +1,75 @@
+table SprintDetails
+	lineageTag: 700444c3-5704-4aef-8f17-ca185e91e7e5
+
+	measure 'Actual Efforts(hrs)' = CALCULATE(sum(SprintDetails[Actual Efforts in Days])*9)
+		formatString: 0
+		lineageTag: 685f3c6f-e168-41cb-af3f-c58cc0043904
+
+	column SprintId
+		dataType: int64
+		formatString: 0
+		lineageTag: 6df2e904-156a-4bf8-b2e7-85e7ae8ef13c
+		summarizeBy: none
+		sourceColumn: SprintId
+
+		annotation SummarizationSetBy = Automatic
+
+	column ResourceId
+		dataType: int64
+		formatString: 0
+		lineageTag: 81d515a0-ae29-4f05-8980-5372c2233d41
+		summarizeBy: none
+		sourceColumn: ResourceId
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Name'
+		dataType: string
+		lineageTag: b4e9fc2e-1f4c-47f5-b662-a2f45b3d023b
+		summarizeBy: none
+		sourceColumn: Task Name
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column StartDate
+		dataType: string
+		lineageTag: d6ad2275-d673-4e57-98a6-43bcbec713f5
+		summarizeBy: none
+		sourceColumn: StartDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column EndDate
+		dataType: string
+		lineageTag: 03b5bf10-16f7-42c8-aafc-fbe4f788b681
+		summarizeBy: none
+		sourceColumn: EndDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Actual Efforts in Days' = DATEDIFF(SprintDetails[StartDate],SprintDetails[EndDate],DAY)
+		formatString: 0
+		lineageTag: c29adc2e-ab09-4a76-b1e9-8c35cfaaaee8
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition SprintDetails-91f79b6a-5d70-4a39-a14a-be5a38b32998 = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlTSAeOSxOJsBRDDwFDXsTRd18jA0BLEs0DwYnUgyo1gyo0IKgepMAbiEJByYzQFQIuNkJTHAgA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type text) meta [Serialized.Text = true]) in type table [SprintId = _t, ResourceId = _t, #"Task Name" = _t, StartDate = _t, EndDate = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"SprintId", Int64.Type}, {"ResourceId", Int64.Type}, {"Task Name", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

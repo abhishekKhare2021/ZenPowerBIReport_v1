@@ -1,0 +1,95 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "sprintdetails.startdate": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "SprintDetails",
+			          "ConceptualProperty": "StartDate"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Actual Start Date": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "sprintdetails.enddate": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "SprintDetails",
+			          "ConceptualProperty": "EndDate"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Actual End Date": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "sprintdetails.actual_effortshrs": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "SprintDetails",
+			          "ConceptualProperty": "Actual Efforts(hrs)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Actual Efforts": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dimsprint.sprintname": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DimSprint",
+			          "ConceptualProperty": "SprintName"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Sprint Name": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+
