@@ -1,0 +1,62 @@
+table FactCustomer
+	lineageTag: e6e548d6-3a00-4219-8ba1-66c0f0107545
+
+	column CustomrID
+		dataType: int64
+		formatString: 0
+		lineageTag: 75492528-4362-4e96-918a-3933a8b11118
+		summarizeBy: count
+		sourceColumn: CustomrID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product
+		dataType: string
+		lineageTag: 471032e8-bde2-447d-be11-1523e277b5ce
+		summarizeBy: none
+		sourceColumn: Product
+
+		annotation SummarizationSetBy = Automatic
+
+	column Qty
+		dataType: int64
+		formatString: 0
+		lineageTag: c8436689-a15c-460b-ad67-163afa8d9656
+		summarizeBy: sum
+		sourceColumn: Qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesAmount
+		dataType: int64
+		formatString: 0
+		lineageTag: bd034c6e-f898-4c2b-9979-e16f8603a823
+		summarizeBy: sum
+		sourceColumn: SalesAmount
+
+		annotation SummarizationSetBy = Automatic
+
+	column TransactionDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2a5d9c48-f604-4816-a49a-4361cec4b466
+		summarizeBy: none
+		sourceColumn: TransactionDate
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition FactCustomer = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("fZDBDsIgDIbfhfMSaEend88a78sOxJloJHLYLr792o4FDeoB2pAvf/vR9wacAzCNOd7jg0vLh5/4JksWHZIZmkIdbukSw3yduPeC/0HDc3xx7QRYqV1NnVIao8aRRNLPuHOY5sAVZcGMtZ8YFg3chqLtaujdQseqRfsVzRaoskoh1FjRkA9EzfMWqCY3D3ECv664z9iwAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [CustomrID = _t, Product = _t, Qty = _t, SalesAmount = _t, TransactionDate = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"CustomrID", Int64.Type}, {"Product", type text}, {"Qty", Int64.Type}, {"SalesAmount", Int64.Type}, {"TransactionDate", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
